@@ -11,7 +11,7 @@
     
     $.expr[':'].linkingToImage = function(elem, index, match){
         // This will return true if the specified attribute contains a valid link to an image:
-        return !! ($(elem).attr(match[3]) && $(elem).attr(match[3]).match(/\.(gif|jpe?g|png|bmp)$/i));
+        return !! ($(elem).attr(match[3]) && $(elem).attr(match[3]).match(/(\.(gif|jpe?g|png|bmp)$|^imgur.com\/[\d\w]{5}$)/i));
     };
     
     $.fn.imgPreview = function(userDefinedSettings){
@@ -104,22 +104,33 @@
 			}else{
 				$($container).css("left", e.pageX + s.distanceFromCursor.left);
 			}
-			 console.log('-----Top------------');
-				console.log('epageY ' + e.pageY);
-				console.log('windowsSize.scrollTop ' + windowSize.scrollTop);
-				console.log('windowsSize.height ' + windowSize.height);
-				console.log('popupSize.heifght ' + popupSize.height);
+//			 console.log('-----Top------------');
+//				console.log('epageY ' + e.pageY);
+//				console.log('windowsSize.scrollTop ' + windowSize.scrollTop);
+//				console.log('windowsSize.height ' + windowSize.height);
+//				console.log('popupSize.height ' + popupSize.height);
 				var val = e.pageY -  (windowSize.height / 2 ) + s.distanceFromCursor.top +20;
-				console.log('math ' + val );// 
+//				console.log('math ' + val );// 
 				
 			if (e.pageY - windowSize.scrollTop < popupSize.height && e.pageY - windowSize.scrollTop + popupSize.height > windowSize.height){
-				$($container).css("top",  val);		
+				var oversize = popupSize.height - e.pageY + windowSize.scrollTop;
+//				console.log("overside: " + oversize + " pageY: " + e.pageY + " scrolltop: " + windowSize.scrollTop);
+				if (oversize > 0) {
+					$($container).css("top", windowSize.scrollTop);
+//					console.log("limiting top");
+				} else {
+					$($container).css("top",  val);
+				}
+//				console.log("Scenario 1");
 			}else if (e.pageY - windowSize.scrollTop < popupSize.height){
-				$($container).css("top", e.pageY + s.distanceFromCursor.top);		
+				$($container).css("top", e.pageY + s.distanceFromCursor.top);
+//				console.log("Scenario 2");
 			}else if (windowSize.height + windowSize.scrollTop < e.pageY + popupSize.height + s.distanceFromCursor.top){
 				$($container).css("top", e.pageY - popupSize.height - s.distanceFromCursor.top);
+//				console.log("Scenario 3");
 			} else {
-				$($container).css("top", e.pageY + s.distanceFromCursor.top);
+//				$($container).css("top", e.pageY + s.distanceFromCursor.top);
+//				console.log("Scenario 4");
 			}
                 $($container).show()
             })

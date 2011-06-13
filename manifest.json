@@ -5,7 +5,7 @@
   "options_page": "options.html",
   "background_page": "background.html",
   "permissions": [
-    "tabs", "http://www.reddit.com/*"
+    "tabs", "http://www.reddit.com/*", "http://api.imgur.com/2/*"
   ],
 	"icons": { "16": "icon16.png", 
 		   "48": "icon48.png"},
@@ -13,7 +13,7 @@
     {
       "matches": ["http://www.reddit.com/*"],
       "css": [ "styles.css" ],
-      "js": [ "jquery.min.js", "imgpreview.full.jquery.js","main.js"]
+      "js": [ "jquery-1.6.1.min.js", "imgpreview.full.jquery.js","main.js"]
     }
   ]
 }

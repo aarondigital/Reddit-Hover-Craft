@@ -1,8 +1,12 @@
 #imgPreviewWithStyles {
     background: #222;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    padding: 15px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    padding: 5px;
     z-index: 999;
     border: none;
+}
+
+#loading {
+	display: none;
 }
